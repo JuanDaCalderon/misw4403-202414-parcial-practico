@@ -1,0 +1,17 @@
+# Ignore artifacts:
+build
+dist
+coverage
+node_modules
+.eslintrc.js
+.vscode
+.prettierrc
+nest-cli.json
+README.md
+package.json
+package-lock.json
+postman
+test/jest-e2e.json
+tsconfig.build.json
+tsconfig.json
+yarn.lock
