@@ -1,0 +1,648 @@
+{
+	"info": {
+		"_postman_id": "828a3b17-2e2f-45bc-b52d-eecb1ae150c0",
+		"name": "2. Tienda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37753605",
+		"_collection_link": "https://www.postman.com/misw-apis-uniandes/workspace/misw4403-202414-parcial-practico/collection/37753605-828a3b17-2e2f-45bc-b52d-eecb1ae150c0?action=share&source=collection_link&creator=37753605"
+	},
+	"item": [
+		{
+			"name": "Crear una tienda válida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"tiendaId\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"BOG\",\r\n    \"direccion\": \"calle 50 #42 - 38\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/stores",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una tienda válida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"BOG\",\r\n    \"direccion\": \"calle 50 #42 - 38\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Koaj\",\n    \"ciudad\": \"BOG\",\n    \"direccion\": \"calle 50 #42 - 38\",\n    \"id\": \"385f3b99-ceea-45cd-b019-31e75da1874a\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear una tienda inválida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"    pm.response.to.have.status(412);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"cali\",\r\n    \"direccion\": \"calle 50 #42 - 38\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/stores",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una tienda inválida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"cali\",\r\n    \"direccion\": \"calle 50 #42 - 38\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"La ciudad de la tienda debe ser una cadena de 3 caracteres en mayusculas\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las tiendas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/stores",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las tiendas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"385f3b99-ceea-45cd-b019-31e75da1874a\",\r\n        \"nombre\": \"Koaj\",\r\n        \"ciudad\": \"BOG\",\r\n        \"direccion\": \"calle 50 #42 - 38\",\r\n        \"productos\": []\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una tienda por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/stores/{{tiendaId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores",
+						"{{tiendaId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una tienda por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/{{tiendaId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								"{{tiendaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"385f3b99-ceea-45cd-b019-31e75da1874a\",\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"BOG\",\r\n    \"direccion\": \"calle 50 #42 - 38\",\r\n    \"productos\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una tienda por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/stores/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una tienda por un ID que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 404,\r\n    \"message\": \"La tienda con este id no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una tienda",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"MED\",\r\n    \"direccion\": \"calle 55 #42 - 38\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/stores/{{tiendaId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores",
+						"{{tiendaId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una tienda",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"MED\",\r\n    \"direccion\": \"calle 55 #42 - 38\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores/{{tiendaId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								"{{tiendaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"385f3b99-ceea-45cd-b019-31e75da1874a\",\r\n    \"nombre\": \"Koaj\",\r\n    \"ciudad\": \"MED\",\r\n    \"direccion\": \"calle 55 #42 - 38\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una tienda con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"margarina\",\r\n    \"precio\": \"2000\",\r\n    \"tipo\": \"no perecedero\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/stores/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una tienda con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"margarina\",\r\n    \"precio\": \"2000\",\r\n    \"tipo\": \"no perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 404,\r\n    \"message\": \"La tienda con este id no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una tienda por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/stores/{{tiendaId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores",
+						"{{tiendaId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una tienda por su ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/{{tiendaId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								"{{tiendaId}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar una tienda con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/stores/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"stores",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una tienda con un ID que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 404,\r\n    \"message\": \"La tienda con este id no fue encontrada\"\r\n}"
+				}
+			]
+		}
+	]
+}
