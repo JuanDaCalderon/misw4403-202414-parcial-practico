@@ -2,7 +2,6 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {Module} from '@nestjs/common';
 import {ENTITIES, MODULES} from './shared';
 import {AppController} from './app.controller';
-import { ProductoTiendaModule } from './producto-tienda/producto-tienda.module';
 
 @Module({
   imports: [
@@ -18,8 +17,7 @@ import { ProductoTiendaModule } from './producto-tienda/producto-tienda.module';
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
-    }),
-    ProductoTiendaModule
+    })
   ],
   controllers: [AppController]
 })
